@@ -2,105 +2,233 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
   <title>Control Financiero RYL</title>
 
-  <meta name="theme-color" content="#7b0711">
+  <!-- PWA / Android -->
+  <meta name="theme-color" content="#750710">
+  <meta name="background-color" content="#750710">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
 
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
 
   <style>
-    *{
-      box-sizing:border-box;
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    html,body{
-      width:100%;
-      height:100%;
-      margin:0;
-      background:#750710;
-      font-family:Arial,sans-serif;
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #750710;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    body{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:white;
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
     }
 
-    .splash{
-      text-align:center;
-      padding:30px;
+    .splash {
+      width: 100%;
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+      padding: 30px;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #940a16 0%,
+          #750710 55%,
+          #65050d 100%
+        );
     }
 
-    .logo{
-      width:105px;
-      height:105px;
-      margin:auto;
-      border-radius:24px;
-      background:#a50b17;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:42px;
-      font-weight:bold;
-      box-shadow:0 15px 40px rgba(0,0,0,.25);
+    .logo {
+      width: 110px;
+      height: 110px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #bd0c1b,
+          #8e0712
+        );
+
+      color: #ffffff;
+
+      font-size: 43px;
+      font-weight: 800;
+      letter-spacing: -2px;
+
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, .25),
+        inset 0 1px rgba(255, 255, 255, .15);
     }
 
-    h1{
-      font-size:23px;
-      margin:22px 0 7px;
+    h1 {
+      margin: 25px 0 7px;
+
+      font-size: 25px;
+      font-weight: 700;
+
+      color: #ffffff;
     }
 
-    p{
-      opacity:.75;
-      margin:0;
-      font-size:14px;
+    .empresa {
+      margin: 0;
+
+      font-size: 15px;
+
+      color: rgba(255, 255, 255, .82);
     }
 
-    .loader{
-      width:32px;
-      height:32px;
-      border:3px solid rgba(255,255,255,.25);
-      border-top-color:#fff;
-      border-radius:50%;
-      margin:28px auto 0;
-      animation:girar .8s linear infinite;
+    .loader {
+      width: 38px;
+      height: 38px;
+
+      margin-top: 34px;
+
+      border: 4px solid rgba(255, 255, 255, .25);
+      border-top-color: #ffffff;
+
+      border-radius: 50%;
+
+      animation: girar .8s linear infinite;
     }
 
-    @keyframes girar{
-      to{transform:rotate(360deg)}
+    .estado {
+      margin-top: 15px;
+
+      font-size: 12px;
+
+      color: rgba(255, 255, 255, .60);
+    }
+
+    @keyframes girar {
+      to {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="splash">
-    <div class="logo">RYL</div>
+  <main class="splash">
 
-    <h1>Control Financiero</h1>
-    <p>RYL Telecomunicaciones</p>
+    <div class="logo">
+      RYL
+    </div>
+
+    <h1>
+      Control Financiero
+    </h1>
+
+    <p class="empresa">
+      RYL Telecomunicaciones
+    </p>
 
     <div class="loader"></div>
-  </div>
+
+    <div class="estado">
+      Iniciando aplicación...
+    </div>
+
+  </main>
+
 
   <script>
-    /*
-      En el siguiente paso conectaremos aquí
-      la URL oficial del Web App de RYL.
-    */
 
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./sw.js');
-      });
+    /* =====================================================
+       CONTROL FINANCIERO RYL
+       URL DEL WEB APP PRINCIPAL
+    ===================================================== */
+
+    const RYL_APP_URL =
+      "https://script.google.com/macros/s/AKfycbzyv0AZwzWVvleU4NDGcOm4HiJf8kCWFQOkeV3CQ-YAOcfFK0cO02aTtnH1s9XuvRjN/exec";
+
+
+    /* =====================================================
+       SERVICE WORKER
+    ===================================================== */
+
+    if ("serviceWorker" in navigator) {
+
+      window.addEventListener(
+        "load",
+        function () {
+
+          navigator.serviceWorker
+            .register("./sw.js")
+            .catch(function (error) {
+
+              console.log(
+                "Service Worker:",
+                error
+              );
+
+            });
+
+        }
+      );
+
     }
+
+
+    /* =====================================================
+       ABRIR CONTROL FINANCIERO
+    ===================================================== */
+
+    window.addEventListener(
+      "load",
+      function () {
+
+        setTimeout(
+          function () {
+
+            window.location.replace(
+              RYL_APP_URL
+            );
+
+          },
+          1200
+        );
+
+      }
+    );
+
   </script>
 
 </body>
