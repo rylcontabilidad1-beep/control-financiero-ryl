@@ -2,34 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>CONTROL FINANCIERO RYL</title>
   <meta name="theme-color" content="#750710">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="referrer" content="no-referrer">
-  <title>CONTROL FINANCIERO RYL</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
   <link rel="apple-touch-icon" href="./icon-192.png">
-  <style>
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:#750710;color:#fff;font-family:Arial,sans-serif}main{max-width:420px;text-align:center}h1{font-size:52px;letter-spacing:-3px;margin:0 0 8px}h2{font-size:22px;margin:24px 0 12px}p{line-height:1.6;color:#f1dfe1}a{display:inline-block;margin-top:14px;padding:14px 24px;border-radius:12px;background:white;color:#750710;text-decoration:none;font-weight:700}a:focus-visible{outline:3px solid #ffbd67;outline-offset:5px}small{display:block;margin-top:20px;color:#eac9cd}
-  </style>
+  <style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#750710}#rylApp{position:fixed;inset:0;width:100%;height:100%;height:100dvh;border:0;display:block;background:#750710}</style>
 </head>
 <body>
-  <main>
-    <h1>RYL</h1><div>TELECOMUNICACIONES</div>
-    <h2>Control financiero</h2>
-    <p id="estado" role="status">Abriendo el acceso seguro…</p>
-    <a id="abrir" href="https://script.google.com/macros/s/AKfycbzyv0AZwzWVvleU4NDGcOm4HiJf8kCWFQOkeV3CQ-YAOcfFK0cO02aTtnH1s9XuvRjN/exec" target="_blank" rel="noopener noreferrer">Abrir sistema</a>
-    <small>Ingresa con tu usuario y contraseña habituales.</small>
-  </main>
+  <iframe id="rylApp" src="https://script.google.com/macros/s/AKfycbzyv0AZwzWVvleU4NDGcOm4HiJf8kCWFQOkeV3CQ-YAOcfFK0cO02aTtnH1s9XuvRjN/exec" title="Control Financiero RYL" referrerpolicy="origin" allow="clipboard-read; clipboard-write"></iframe>
   <script>
-    (function(){
-      const enlace=document.getElementById('abrir');
-      if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
-      if(window.top===window.self){window.location.replace(enlace.href);}else{document.getElementById('estado').textContent='Abre el sistema en su página segura para continuar.';}
-    })();
+    if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));
   </script>
 </body>
 </html>
