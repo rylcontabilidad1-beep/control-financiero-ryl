@@ -16,6 +16,18 @@
 <body>
   <iframe id="rylApp" src="https://script.google.com/macros/s/AKfycbzyv0AZwzWVvleU4NDGcOm4HiJf8kCWFQOkeV3CQ-YAOcfFK0cO02aTtnH1s9XuvRjN/exec" title="Control Financiero RYL" referrerpolicy="origin" allow="clipboard-read; clipboard-write"></iframe>
   <script>
+    window.addEventListener('message', event => {
+      if (event.data !== 'RYL_REABRIR_INGRESO' ||
+          !/^https:\/\/(?:script\.google\.com|[a-z0-9-]+-script\.googleusercontent\.com)$/.test(event.origin)) return;
+      const frame = document.getElementById('rylApp');
+      let source = event.source;
+      for (let depth = 0; source && source !== window && depth < 5; depth++, source = source.parent) {
+        if (source === frame.contentWindow) {
+          frame.src = frame.getAttribute('src');
+          break;
+        }
+      }
+    });
     if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));
   </script>
 </body>
